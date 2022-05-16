@@ -1,0 +1,55 @@
+﻿@model KullaniciGirisModel
+@{
+    ViewData["Title"] = "Kullanıcı Girişi";
+}
+
+
+<div class="container login-page">
+    <div class="row">
+        <div class="col-12">
+            <h2>@ViewData["Title"]</h2>
+            <form asp-action="Giris">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input asp-for="KullaniciAdi" type="text" id="form2Example1" class="form-control" />
+                    <label asp-for="KullaniciAdi" class="form-label" for="form2Example1"></label>
+                    <span asp-validation-for="KullaniciAdi" class="text-danger"></span>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    <input asp-for="Sifre" type="password" id="form2Example2" class="form-control" />
+                    <label asp-for="Sifre" class="form-label" for="form2Example2"></label>
+                    <span asp-validation-for="Sifre" class="text-danger"></span>
+                </div>
+
+                <!-- 2 column grid layout for inline styling -->
+                <div class="row mb-4">
+                    <div class="col d-flex justify-content-center">
+                        <!-- Checkbox -->
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                            <label class="form-check-label" for="form2Example31">Beni Hatırla</label>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <!-- Simple link -->
+                        <a href="#!">Şifremi Unuttum</a>
+                    </div>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4" value="Giris">Giriş Yap</button>
+
+                <!-- Register buttons -->
+                <div class="text-center">
+                    <p>Kullanıcı Değilseniz <a href="#!">Kayıt Ol</a></p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

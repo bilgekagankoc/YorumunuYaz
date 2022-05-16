@@ -1,0 +1,30 @@
+﻿using DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAccess.Contexts
+{
+    public class YorumunuYazContext : DbContext
+    {
+        public DbSet<Rol> Roller { get; set; }
+        public DbSet<Kullanici> Kullanicilar { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(connectionString: @"server=.;database=YORUMUNUYAZDB;user id=sa;password=122333;multipleactiveresultsets=true;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Kullanici>()
+                .ToTable("Kullanicilar");
+
+            modelBuilder.Entity<Rol>()
+                .ToTable("Roller");
+        }
+    }
+}
