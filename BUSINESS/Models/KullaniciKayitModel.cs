@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Business.Enums;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Business.Models
@@ -26,5 +27,7 @@ namespace Business.Models
         [Required(ErrorMessage = "{0} gereklidir!")]
         [EmailAddress(ErrorMessage = "Geçersiz mail adresi!")]
         public string ePosta { get; set; }
+        [DisplayName("Rol")]
+        public Rol Rol { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace Business.Services
 
         public Result Add(RolModel model)
         {
-            if (Repo.Query().Any(r => r.Adi.ToUpper() == model.Adi.ToUpper().Trim()))
+            if (Repo.Query().Any(r => r.Adi.ToLower() == model.Adi.ToLower().Trim()))
                 return new ErrorResult("Aynı Rol Adına Sahip Rol Bulunmaktadır!");
             Rol entity = new Rol()
             {
@@ -47,7 +47,7 @@ namespace Business.Services
 
         public Result Update(RolModel model)
         {
-            if (Repo.Query().Any(r => r.Adi.ToUpper() == model.Adi.ToUpper().Trim() && r.Id != model.Id))
+            if (Repo.Query().Any(r => r.Adi.ToLower() == model.Adi.ToLower().Trim() && r.Id != model.Id))
                 return new ErrorResult("Aynı Rol Adına Sahip Rol Bulunmaktadır!");
             Rol entity = Repo.Query(r => r.Id == model.Id).SingleOrDefault();
             entity.Adi = model.Adi.Trim();

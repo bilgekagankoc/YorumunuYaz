@@ -36,12 +36,8 @@ namespace Business.Services
         {
             var kullanici = new KullaniciModel()
             {
-                AktifMi = true, // yeni kaydolan kullanıcılar aktif olarak kaydedilmektedir
-
-                // rol id'nin direkt integer olarak atanması doğru değildir çünkü veritabanında rol tablosundaki veriler dolayısıyla id'ler değişebilir
-                //model.RolId = 2; 
-                RolId = (int)Rol.Kullanici, // yeni kaydolan kullanıcılar Kullanıcı Rolü'nde kaydedilmektedir
-
+                AktifMi = true, 
+                RolId = model.Rol == 0 ? (int)Rol.Kullanici : (int)model.Rol, // 0 geliyorsa kullanıcı gelmiyorsa gelen değeri setler.
                 KullaniciAdi = model.KullaniciAdi,
                 Sifre = model.Sifre,
                 ePosta = model.ePosta,

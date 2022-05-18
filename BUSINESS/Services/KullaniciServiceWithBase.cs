@@ -46,23 +46,26 @@ namespace Business.Services
                             RolAdiDisplay = rol.Adi,
                             AktifMi = kullanici.AktifMi,
                             AktifDisplay = kullanici.AktifMi ? "Evet" : "Hayır",
-                            Sifre = kullanici.Sifre
+                            Sifre = kullanici.Sifre,
+                            ePosta = kullanici.ePosta
                         };
             return query;
         }
 
         public Result Add(KullaniciModel model)
         {
-            if (Repo.Query().Any(k => k.KullaniciAdi.ToUpper() == model.KullaniciAdi.ToUpper().Trim()))
+            if (Repo.Query().Any(k => k.KullaniciAdi.ToLower() == model.KullaniciAdi.ToLower().Trim()))
                 return new ErrorResult("Kullanıcı adı başkası tarafından kullanılmaktadır!");
-            if (Repo.Query().Any(k => k.ePosta.ToUpper() == model.ePosta.ToUpper().Trim()))
+            if (Repo.Query().Any(k => k.ePosta.ToLower() == model.ePosta.ToLower().Trim()))
                 return new ErrorResult("E-Posta başkası tarafından kullanılmaktadır!");
             var entity = new Kullanici()
             {
+                AktifMi = model.AktifMi,
                 ePosta = model.ePosta,
                 KullaniciAdi = model.KullaniciAdi,
                 RolId = model.RolId.Value,
                 Sifre = model.Sifre,
+                Guid = Guid.NewGuid().ToString()
             };
             Repo.Add(entity);
             return new SuccessResult();
@@ -70,9 +73,9 @@ namespace Business.Services
 
         public Result Update(KullaniciModel model)
         {
-            if (Repo.Query().Any(x => x.KullaniciAdi.ToUpper() == model.KullaniciAdi.ToUpper().Trim() && x.Id != model.Id))
+            if (Repo.Query().Any(x => x.KullaniciAdi.ToLower() == model.KullaniciAdi.ToLower().Trim() && x.Id != model.Id))
                 return new ErrorResult("Kullanıcı adı başkası tarafından kullanılmaktadır!");
-            if (Repo.Query("KullaniciDetayi").Any(x => x.ePosta.ToUpper() == model.ePosta.ToUpper().Trim() && x.Id != model.Id))
+            if (Repo.Query("KullaniciDetayi").Any(x => x.ePosta.ToLower() == model.ePosta.ToLower().Trim() && x.Id != model.Id))
                 return new ErrorResult("E-Posta başkası tarafından kullanılmaktadır!");
             var entity = Repo.Query(x=>x.Id == model.Id).SingleOrDefault();
             if(entity != null)

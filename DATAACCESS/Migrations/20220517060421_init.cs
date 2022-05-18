@@ -30,6 +30,7 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     KullaniciAdi = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Sifre = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    ePosta = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AktifMi = table.Column<bool>(type: "bit", nullable: false),
                     RolId = table.Column<int>(type: "int", nullable: false),
                     Guid = table.Column<string>(type: "nvarchar(max)", nullable: true)

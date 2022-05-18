@@ -18,7 +18,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 #region Session
 builder.Services.AddSession(config =>
 {
-config.IdleTimeout = TimeSpan.FromMinutes(40); // default: 20 dakika
+config.IdleTimeout = TimeSpan.FromMinutes(30); 
 });
 #endregion
 #region DI

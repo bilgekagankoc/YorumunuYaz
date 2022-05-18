@@ -1,0 +1,48 @@
+﻿@model KullaniciKayitModel
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+
+<div class="container login-page">
+    <div class="row">
+        <div class="col-12">
+            <h2>@ViewData["Title"]</h2>
+            <form asp-action="Kayit">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-outline mb-4">
+                    <input asp-for="KullaniciAdi" type="text" id="form2Example1" class="form-control" />
+                    <label asp-for="KullaniciAdi" class="form-label" for="form2Example1"></label>
+                    <span asp-validation-for="KullaniciAdi" class="text-danger"></span>
+                </div>
+                <div class="form-outline mb-4">
+                    <input asp-for="Sifre" type="password" id="form2Example1" class="form-control" />
+                    <label asp-for="Sifre" class="form-label" for="form2Example1"></label>
+                    <span asp-validation-for="Sifre" class="text-danger"></span>
+                </div>
+                <div class="form-outline mb-4">
+                    <input asp-for="SifreOnay" type="password" id="form2Example1" class="form-control" />
+                    <label asp-for="SifreOnay" class="form-label" for="form2Example1"></label>
+                    <span asp-validation-for="SifreOnay" class="text-danger"></span>
+                </div>
+                <div class="form-outline mb-4">
+                    <input asp-for="ePosta" type="text" id="form2Example1" class="form-control" />
+                    <label asp-for="ePosta" class="form-label" for="form2Example1"></label>
+                    <span asp-validation-for="ePosta" class="text-danger"></span>
+                </div>
+                @if(User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                {
+                    <div class="form-outline mb-4">
+                     <select asp-for="Rol" class="form-control" id="sehirler" asp-items="ViewBag.RolId">
+                        <option value="">-- Rol Seçiniz --</option>
+                    </select>
+                    <label asp-for="Rol" class="form-label" for="form2Example1"></label>
+                    <span asp-validation-for="Rol" class="text-danger"></span>
+                    </div>
+                }
+                <button type="submit" class="btn btn-primary btn-block mb-4" value="Kayit">Kayıt Ol</button>
+            </form>
+        </div>
+    </div>
+</div>
