@@ -2,11 +2,11 @@
 @{
     ViewData["Title"] = "Kullanıcı İşlemleri";
 }
-
 <div class="container">
     <div class="row">
         <div class="col-12">
             <h2>@ViewData["Title"]</h2>
+            <a class="btn btn-primary btn-sm mb-2" asp-action="Kayit" asp-controller="Hesaplar">Yeni Kullanıcı Kaydet</a>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -19,16 +19,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var kullanici in Model)
+                    @foreach (var kullanici in Model)
                     {
                         <tr>
-                        <th scope="row">@kullanici.Id</th>
-                        <td>@kullanici.KullaniciAdi</td>
-                        <td>@kullanici.ePosta</td>
-                        <td>@kullanici.RolAdiDisplay</td>
-                        <td>@kullanici.AktifDisplay</td>
-                        <td>İŞLEM</td>
-                    </tr>
+                            <th scope="row">@kullanici.Id</th>
+                            <td>@kullanici.KullaniciAdi</td>
+                            <td>@kullanici.ePosta</td>
+                            <td>@kullanici.RolAdiDisplay</td>
+                            <td>@kullanici.AktifDisplay</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" asp-action="Sil">Sil</a>
+                                <a class="btn btn-primary btn-sm" asp-action="Duzenle" asp-route-id="@kullanici.Id" >Düzenle</a>
+                                <a class="btn btn-primary btn-sm" asp-action="Detay">Detay</a>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>

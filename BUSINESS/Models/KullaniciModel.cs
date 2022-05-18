@@ -1,4 +1,5 @@
 ﻿using AppCore.Records.Bases;
+using DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,6 +33,7 @@ namespace Business.Models
         [Required(ErrorMessage = "{0} gereklidir!")]
         [EmailAddress(ErrorMessage = "Geçersiz mail adresi!")]
         public string ePosta { get; set; }
+        public Rol Rol { get; set; }
         #endregion
 
         #region Gösterim için ekstra özellikler

@@ -47,7 +47,9 @@ namespace Business.Services
                             AktifMi = kullanici.AktifMi,
                             AktifDisplay = kullanici.AktifMi ? "Evet" : "Hayır",
                             Sifre = kullanici.Sifre,
-                            ePosta = kullanici.ePosta
+                            ePosta = kullanici.ePosta,
+                            Guid = kullanici.Guid,
+                            Rol = kullanici.Rol
                         };
             return query;
         }
