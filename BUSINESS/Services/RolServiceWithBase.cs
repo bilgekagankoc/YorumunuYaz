@@ -29,8 +29,12 @@ namespace Business.Services
             {
                 Id = x.Id,
                 Adi = x.Adi,
-                KullanicilarDisplay = x.Kullanicilar.Select(x => x.KullaniciAdi).ToList()
-            });
+                Kullanicilar = x.Kullanicilar,
+                OlusturanKullaniciId = x.OlusturanKullaniciId,
+                OlusturmaTarih = x.OlusturmaTarih,
+                AktifMi = x.AktifMi,
+                AktifMiDisplay = x.AktifMi == true ?"Aktif" : "Pasif"
+            }); 
         }
 
         public Result Add(RolModel model)
@@ -39,7 +43,11 @@ namespace Business.Services
                 return new ErrorResult("Aynı Rol Adına Sahip Rol Bulunmaktadır!");
             Rol entity = new Rol()
             {
-                Adi = model.Adi.Trim()
+                Adi = model.Adi.Trim(),
+                AktifMi = true,
+                OlusturanKullaniciId = model.OlusturanKullaniciId,
+                OlusturmaTarih = DateTime.Now,
+                Guid = Guid.NewGuid().ToString()
             };
             Repo.Add(entity);
             return new SuccessResult();

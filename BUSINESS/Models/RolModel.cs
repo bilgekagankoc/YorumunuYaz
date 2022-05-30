@@ -1,4 +1,5 @@
 ﻿using AppCore.Records.Bases;
+using DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,8 @@ namespace Business.Models
 
         #region Sayfanın ekstra ihtiyacı olan özellikler
         [DisplayName("Kullanıcılar")]
-        public List<string> KullanicilarDisplay { get; set; }
+        public List<Kullanici> Kullanicilar { get; set; }
+        public string AktifMiDisplay { get; set; }
         #endregion
     }
 }

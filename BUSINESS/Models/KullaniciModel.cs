@@ -33,7 +33,6 @@ namespace Business.Models
         [Required(ErrorMessage = "{0} gereklidir!")]
         [EmailAddress(ErrorMessage = "Geçersiz mail adresi!")]
         public string ePosta { get; set; }
-        public Rol Rol { get; set; }
         #endregion
 
         #region Gösterim için ekstra özellikler

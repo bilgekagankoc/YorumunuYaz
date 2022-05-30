@@ -1,0 +1,36 @@
+﻿@model RolModel
+@{
+     ViewData["Title"] = "Rol Kayıt";
+     //Model.OlusturanKullaniciId = User.Claims
+
+     //var userIdValue = -1;
+     //       var claimsIdentity = User.Identity as ClaimsIdentity;
+     //       if (claimsIdentity != null)
+     //       {
+     //           var userIdClaim = claimsIdentity.Claims
+     //               .FirstOrDefault(x => x.Type == ClaimTypes.Sid);
+
+     //           if (userIdClaim != null)
+     //           {
+     //               userIdValue = Convert.ToInt32(userIdClaim.Value);
+     //           }
+     //       }
+     //       return userIdValue;
+}
+<div class="container login-page">
+    <div class="row">
+        <div class="col-12">
+            <h2>@ViewData["Title"]</h2>
+            <form asp-action="Kayit">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-outline mb-4">
+                    <input asp-for="Adi" type="text" id="form2Example1" class="form-control" />
+                    <label asp-for="Adi" class="form-label" for="form2Example1"></label>
+                    <span asp-validation-for="Adi" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4" value="Kayit">Rol Kaydet</button>
+            </form>
+        </div>
+    </div>
+</div>

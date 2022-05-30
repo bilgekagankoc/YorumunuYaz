@@ -29,10 +29,16 @@ namespace MvcWebUI.Controllers
                         Guid=Guid.NewGuid().ToString(),
                         Sifre="122333",
                         ePosta ="asd@asd.com",
+                        OlusturanKullaniciId=1,
+                        OlusturmaTarih=DateTime.Now,
+                        RolId=1,
                         Rol=new Rol()
                             {
                             Adi="admin",
-                            Guid=Guid.NewGuid().ToString()
+                            Guid=Guid.NewGuid().ToString(),
+                            AktifMi = true,
+                            OlusturanKullaniciId=1,
+                            OlusturmaTarih = DateTime.Now
                         },
                     },
                     new Kullanici()
@@ -42,10 +48,16 @@ namespace MvcWebUI.Controllers
                         ePosta ="asd@asdasd.com",
                         Guid=Guid.NewGuid().ToString(),
                         Sifre="122333",
+                        OlusturanKullaniciId=1,
+                        OlusturmaTarih=DateTime.Now,
+                        RolId=2,
                         Rol=new Rol()
                             {
                             Adi="kullanici",
-                            Guid=Guid.NewGuid().ToString()
+                            AktifMi = true,
+                            Guid=Guid.NewGuid().ToString(),
+                            OlusturanKullaniciId=1,
+                            OlusturmaTarih = DateTime.Now
                         }
                     }
                 };
@@ -55,7 +67,7 @@ namespace MvcWebUI.Controllers
                 }
                 dbcontext.SaveChanges();
             }
-            
+
             return Content("<label style=\"color:red;\"><b>İlk veriler oluşturuldu.</b></label>", "text/html", Encoding.UTF8);
         }
     }

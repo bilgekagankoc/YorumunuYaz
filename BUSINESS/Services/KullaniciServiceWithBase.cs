@@ -49,7 +49,6 @@ namespace Business.Services
                             Sifre = kullanici.Sifre,
                             ePosta = kullanici.ePosta,
                             Guid = kullanici.Guid,
-                            Rol = kullanici.Rol
                         };
             return query;
         }
@@ -77,9 +76,11 @@ namespace Business.Services
         {
             if (Repo.Query().Any(x => x.KullaniciAdi.ToLower() == model.KullaniciAdi.ToLower().Trim() && x.Id != model.Id))
                 return new ErrorResult("Kullanıcı adı başkası tarafından kullanılmaktadır!");
-            if (Repo.Query("KullaniciDetayi").Any(x => x.ePosta.ToLower() == model.ePosta.ToLower().Trim() && x.Id != model.Id))
+            if (Repo.Query().Any(x => x.ePosta.ToLower() == model.ePosta.ToLower().Trim() && x.Id != model.Id))
                 return new ErrorResult("E-Posta başkası tarafından kullanılmaktadır!");
             var entity = Repo.Query(x=>x.Id == model.Id).SingleOrDefault();
+            if (model.Sifre == null)
+                model.Sifre = entity.Sifre;
             if(entity != null)
             {
                 entity.Sifre = model.Sifre;

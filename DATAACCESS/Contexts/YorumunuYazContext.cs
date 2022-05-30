@@ -15,8 +15,8 @@ namespace DataAccess.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(connectionString: @"server=.;database=YORUMUNUYAZDB;user id=sa;password=122333;multipleactiveresultsets=true;"); // ev
-            optionsBuilder.UseSqlServer(connectionString: @"Server=(localdb)\mssqllocaldb; initial catalog  =YorumunuYaz; integrated security = true"); // iş
+            optionsBuilder.UseSqlServer(connectionString: @"server=.;database=YORUMUNUYAZDB;user id=sa;password=122333;multipleactiveresultsets=true;"); // ev
+            //optionsBuilder.UseSqlServer(connectionString: @"Server=(localdb)\mssqllocaldb; initial catalog  =YorumunuYaz; integrated security = true"); // iş
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,6 +26,12 @@ namespace DataAccess.Contexts
 
             modelBuilder.Entity<Rol>()
                 .ToTable("Roller");
+
+            modelBuilder.Entity<Yorum>()
+                .ToTable("Yorumlar");
+
+            modelBuilder.Entity<Kategori>()
+                .ToTable("Kategoriler");
         }
     }
 }

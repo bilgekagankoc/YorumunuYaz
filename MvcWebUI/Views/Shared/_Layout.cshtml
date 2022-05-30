@@ -93,16 +93,16 @@
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
             @if (User.IsInRole("admin"))
             {
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Admin İşlemleri
-            </div>
+                <hr class="sidebar-divider">
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Admin İşlemleri
+                </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            
+                <!-- Nav Item - Pages Collapse Menu -->
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                    aria-expanded="true" aria-controls="collapsePages">
@@ -113,6 +113,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Admin Tanımlar</h6>
                             <a class="collapse-item" asp-action="Index" asp-controller="Kullanici">Kullanıcı İşlemleri</a>
+                            <a class="collapse-item" asp-action="Index" asp-controller="Rol">Rol İşlemleri</a>
                         </div>
                     </div>
                 </li>
@@ -179,7 +180,7 @@
                     </form>
                     @if (TempData["Result"] != null)
                     {
-                        <div class="alert alert-@TempData["Result"]" role="alert">
+                        <div class="alert alert-@TempData["Result"]" id="bilgilendirme" role="alert">
                             @TempData["Message"]
                         </div>
                     }
@@ -322,6 +323,15 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
+    <script>
+            $( document ).ready(function()
+            {
+                 setTimeout(function()
+                    { 
+                     $("#bilgilendirme").hide();
+                    }, 3000);
+            });
+    </script>
 </body>
 
 </html>

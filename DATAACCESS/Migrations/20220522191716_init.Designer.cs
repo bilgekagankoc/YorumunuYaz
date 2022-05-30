@@ -4,6 +4,7 @@ using DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(YorumunuYazContext))]
-    partial class YorumunuYazContextModelSnapshot : ModelSnapshot
+    [Migration("20220522191716_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,22 +40,19 @@ namespace DataAccess.Migrations
                         .HasMaxLength(22)
                         .HasColumnType("nvarchar(22)");
 
-                    b.Property<bool>("AktifMi")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("GuncellemeTarih")
+                    b.Property<DateTime>("GuncellemeTarih")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("GuncelleyenKullaniciId")
+                    b.Property<int>("GuncelleyenKullaniciId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OlusturanKullaniciId")
+                    b.Property<int>("OlusturanKullaniciId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("OlusturmaTarih")
+                    b.Property<DateTime>("OlusturmaTarih")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -75,10 +74,10 @@ namespace DataAccess.Migrations
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("GuncellemeTarih")
+                    b.Property<DateTime>("GuncellemeTarih")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("GuncelleyenKullaniciId")
+                    b.Property<int>("GuncelleyenKullaniciId")
                         .HasColumnType("int");
 
                     b.Property<string>("KullaniciAdi")
@@ -86,10 +85,10 @@ namespace DataAccess.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<int?>("OlusturanKullaniciId")
+                    b.Property<int>("OlusturanKullaniciId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("OlusturmaTarih")
+                    b.Property<DateTime>("OlusturmaTarih")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("RolId")
@@ -124,22 +123,19 @@ namespace DataAccess.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<bool>("AktifMi")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("GuncellemeTarih")
+                    b.Property<DateTime>("GuncellemeTarih")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("GuncelleyenKullaniciId")
+                    b.Property<int>("GuncelleyenKullaniciId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OlusturanKullaniciId")
+                    b.Property<int>("OlusturanKullaniciId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("OlusturmaTarih")
+                    b.Property<DateTime>("OlusturmaTarih")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -155,9 +151,6 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("AktifMi")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Baslik")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -166,10 +159,10 @@ namespace DataAccess.Migrations
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("GuncellemeTarih")
+                    b.Property<DateTime>("GuncellemeTarih")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("GuncelleyenKullaniciId")
+                    b.Property<int>("GuncelleyenKullaniciId")
                         .HasColumnType("int");
 
                     b.Property<string>("Icerik")
@@ -187,10 +180,10 @@ namespace DataAccess.Migrations
                     b.Property<int>("KullaniciId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OlusturanKullaniciId")
+                    b.Property<int>("OlusturanKullaniciId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("OlusturmaTarih")
+                    b.Property<DateTime>("OlusturmaTarih")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

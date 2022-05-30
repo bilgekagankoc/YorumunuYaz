@@ -20,9 +20,8 @@ namespace DataAccess.Entities
         public string Sifre { get; set; }
         [Required]
         public string ePosta { get; set; }
-
-        public bool AktifMi { get; set; }
         public int RolId { get; set; }
         public Rol Rol { get; set; }
+        public List<Yorum> Yorumlar { get; set; }
     }
 }

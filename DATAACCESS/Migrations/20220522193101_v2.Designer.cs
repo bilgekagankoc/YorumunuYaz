@@ -4,6 +4,7 @@ using DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(YorumunuYazContext))]
-    partial class YorumunuYazContextModelSnapshot : ModelSnapshot
+    [Migration("20220522193101_v2")]
+    partial class v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +39,6 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasMaxLength(22)
                         .HasColumnType("nvarchar(22)");
-
-                    b.Property<bool>("AktifMi")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(max)");
@@ -124,9 +123,6 @@ namespace DataAccess.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<bool>("AktifMi")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(max)");
 
@@ -154,9 +150,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("AktifMi")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Baslik")
                         .IsRequired()

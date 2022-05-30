@@ -26,7 +26,7 @@ namespace MvcWebUI.Controllers
         public IActionResult Duzenle(int id)
         {
             var result = _kullaniciService.Query().FirstOrDefault(x => x.Id == id);
-            if(result == null)
+            if (result == null)
             {
                 TempData["Result"] = "danger";
                 TempData["Message"] = "Kullanıcı Bulunamadı";
@@ -35,7 +35,7 @@ namespace MvcWebUI.Controllers
             else
             {
                 var roller = _rolService.RolleriGetir();
-                ViewBag.RolId = new SelectList(roller.Data, "Id", "Adi", result.RolId);
+                ViewBag.RolId = new SelectList(roller.Data, "Id", "Adi", result.RolId.Value);
                 return View(result);
             }
         }
@@ -43,8 +43,22 @@ namespace MvcWebUI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Duzenle(KullaniciModel model)
         {
-
-            return RedirectToAction("Index", "Kullanicilar");
+            if (model != null)
+            {
+                var result = _kullaniciService.Update(model);
+                if (result.IsSuccessful)
+                {
+                    TempData["Result"] = "success";
+                    TempData["Message"] = $"{model.KullaniciAdi} Başarıyla Güncellendi";
+                    return RedirectToAction(nameof(Index));
+                }
+                TempData["Result"] = "danger";
+                TempData["Message"] = "Kullanıcı Bulunamadı";
+            }
+            var roller = _rolService.RolleriGetir();
+            ViewBag.RolId = new SelectList(roller.Data, "Id", "Adi", model.RolId.Value);
+            return View(model);
         }
+        // TODO detay yapılacak girdiği mesaj istatistikleri ile beraber -- sil yapılacak
     }
 }
