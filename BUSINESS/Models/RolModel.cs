@@ -21,7 +21,12 @@ namespace Business.Models
 
         #region Sayfanın ekstra ihtiyacı olan özellikler
         [DisplayName("Kullanıcılar")]
-        public List<Kullanici> Kullanicilar { get; set; }
+        public List<string> Kullanicilar { get; set; }
+        [DisplayName("Oluşturan Kullanıcı Adı")]
+        public string OlusturanKullaniciAdi { get; set; }
+        [DisplayName("Güncelleyen Kullanıcı Adı")]
+        public string GuncelleyenKullaniciAdi { get; set; }
+        [DisplayName("Aktif Mi")]
         public string AktifMiDisplay { get; set; }
         #endregion
     }

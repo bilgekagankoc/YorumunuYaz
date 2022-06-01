@@ -98,6 +98,11 @@ namespace Business.Services
             throw new NotImplementedException();
         }
 
+        public Result SoftDelete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Dispose()
         {
             Repo.Dispose();
@@ -118,6 +123,7 @@ namespace Business.Services
                 return new ErrorResult<KullaniciModel>("Kullanıcı bulunamadı!");
             return new SuccessResult<KullaniciModel>(kullanici);
         }
+
 
     }
 }

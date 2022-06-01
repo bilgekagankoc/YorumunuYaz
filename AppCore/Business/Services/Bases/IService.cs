@@ -12,5 +12,6 @@ namespace AppCore.Business.Services.Bases
         Result Add(TModel model);
         Result Update(TModel model);
         Result Delete(int id);
+        Result SoftDelete(int id);
     }
 }

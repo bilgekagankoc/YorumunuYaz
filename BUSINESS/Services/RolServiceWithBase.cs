@@ -29,11 +29,13 @@ namespace Business.Services
             {
                 Id = x.Id,
                 Adi = x.Adi,
-                Kullanicilar = x.Kullanicilar,
+                Kullanicilar = x.Kullanicilar.Select(x=>x.KullaniciAdi).ToList(),
                 OlusturanKullaniciId = x.OlusturanKullaniciId,
                 OlusturmaTarih = x.OlusturmaTarih,
                 AktifMi = x.AktifMi,
-                AktifMiDisplay = x.AktifMi == true ?"Aktif" : "Pasif"
+                AktifMiDisplay = x.AktifMi == true ?"Aktif" : "Pasif",
+                GuncellemeTarih = x.GuncellemeTarih,
+                GuncelleyenKullaniciId = x.GuncelleyenKullaniciId
             }); 
         }
 
@@ -59,6 +61,8 @@ namespace Business.Services
                 return new ErrorResult("Aynı Rol Adına Sahip Rol Bulunmaktadır!");
             Rol entity = Repo.Query(r => r.Id == model.Id).SingleOrDefault();
             entity.Adi = model.Adi.Trim();
+            entity.GuncelleyenKullaniciId = model.GuncelleyenKullaniciId;
+            entity.GuncellemeTarih = DateTime.Now;
             Repo.Update(entity);
             return new SuccessResult();
         }
@@ -70,6 +74,11 @@ namespace Business.Services
                 return new ErrorResult("Silinmek istenen role ait kullanıcılar bulunmaktadır!");
             Repo.Delete(entity);
             return new SuccessResult();
+        }
+
+        public Result SoftDelete(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public void Dispose()
@@ -92,7 +101,6 @@ namespace Business.Services
                 return new ErrorResult<List<RolModel>>("Rol bulunamadı!");
             return new SuccessResult<List<RolModel>>(roller.Count + " rol bulundu.", roller);
         }
-
 
     }
 }

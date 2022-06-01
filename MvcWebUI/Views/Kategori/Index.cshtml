@@ -1,17 +1,18 @@
 ﻿@model List<RolModel>
 @{
-    ViewData["Title"] = "Rol Listele";
+    ViewData["Title"] = "Kategori Listele";
 }
 <div class="container">
     <div class="row">
         <div class="col-12">
             <h2>@ViewData["Title"]</h2>
-            <a class="btn btn-primary btn-sm mb-2" asp-action="Kayit" asp-controller="Rol">Yeni Rol Kaydet</a>
+            <a class="btn btn-primary btn-sm mb-2" asp-action="Kayit" asp-controller="Rol">Yeni Kategori Kaydet</a>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Rol Adi</th>
+                        <th scope="col">Adı</th>
+                        <th scope="col">Açıklama</th>
                         <th scope="col">Aktif</th>
                         <th scope="col">Oluşturma Tarih</th>
                         <th scope="col">Kullanici Sayisi</th>

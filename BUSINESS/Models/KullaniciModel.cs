@@ -41,7 +41,12 @@ namespace Business.Models
         public string RolAdiDisplay { get; set; }
 
         [DisplayName("Aktif")]
-        public string AktifDisplay { get; set; } 
+        public string AktifDisplay { get; set; }
         #endregion
+
+        public override string ToString()
+        {
+            return KullaniciAdi;
+        }
     }
 }
