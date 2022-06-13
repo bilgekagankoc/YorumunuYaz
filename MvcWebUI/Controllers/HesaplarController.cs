@@ -13,7 +13,7 @@ namespace MvcWebUI.Controllers
         private readonly IHesapService _hesapService;
         private readonly IRolService _rolService;
 
-        public HesaplarController(IHesapService hesapService, IRolService rolService = null)
+        public HesaplarController(IHesapService hesapService, IRolService rolService)
         {
             _hesapService = hesapService;
             _rolService = rolService;

@@ -1,0 +1,28 @@
+﻿@model KategoriModel
+@{
+    ViewData["Title"] = "Kategori Düzenle";
+}
+<div class="container login-page">
+    <div class="row">
+        <div class="col-12">
+            <h2>@ViewData["Title"]</h2>
+            <form asp-action="Duzenle">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-outline mb-4">
+                    <input type="hidden" asp-for="Id" />
+                    <input asp-for="Ad" type="text" id="form2Example1" class="form-control" />
+                    <label asp-for="Ad" class="form-label" for="form2Example1"></label>
+                    <span asp-validation-for="Ad" class="text-danger"></span>
+                </div>
+                <div class="form-outline mb-4">
+                    <input type="hidden" asp-for="Id" />
+                    <input asp-for="Aciklama" type="text" id="form2Example1" class="form-control" />
+                    <label asp-for="Aciklama" class="form-label" for="form2Example1"></label>
+                    <span asp-validation-for="Aciklama" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4" value="Kayit">Kategori Duzenle</button>
+            </form>
+        </div>
+    </div>
+</div>

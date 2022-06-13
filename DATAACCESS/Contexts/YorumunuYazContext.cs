@@ -12,6 +12,8 @@ namespace DataAccess.Contexts
     {
         public DbSet<Rol> Roller { get; set; }
         public DbSet<Kullanici> Kullanicilar { get; set; }
+        public DbSet<Kategori> Kategoriler { get; set; }
+        public DbSet<Yorum> Yorumlar { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

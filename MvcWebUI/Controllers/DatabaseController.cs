@@ -61,10 +61,30 @@ namespace MvcWebUI.Controllers
                         }
                     }
                 };
+                Kategori k1 = new Kategori()
+                {
+                    Aciklama = "Otomotiv hakkında herşey",
+                    Ad = "Otomotiv",
+                    Guid = Guid.NewGuid().ToString(),
+                    AktifMi = true,
+                    OlusturanKullaniciId = 1,
+                    OlusturmaTarih = DateTime.Now,
+                };
+                Kategori k2 = new Kategori()
+                {
+                    Aciklama = "Elektronik hakkında herşey",
+                    Ad = "Elektronik",
+                    Guid = Guid.NewGuid().ToString(),
+                    AktifMi = true,
+                    OlusturanKullaniciId = 2,
+                    OlusturmaTarih = DateTime.Now,
+                };
                 foreach (var item in kullanicilar)
                 {
                     dbcontext.Kullanicilar.Add(item);
                 }
+                dbcontext.Kategoriler.Add(k1);
+                dbcontext.Kategoriler.Add(k2);
                 dbcontext.SaveChanges();
             }
 

@@ -1,0 +1,63 @@
+﻿@model KategoriModel
+@{
+
+}
+
+<div>
+    <h4 class="mb-3">Rol</h4>
+    <dl class="row">
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Ad)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.Ad)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.Aciklama)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model =>model.YorumSayısı)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.YorumSayısı)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model =>model.OlusturmaTarih)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.OlusturmaTarih)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model =>model.OlusturanKullaniciAdi)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.OlusturanKullaniciAdi)
+        </dd>
+        @if (Model.GuncellemeTarih != null)
+        {
+            <dt class="col-2">
+                @Html.DisplayNameFor(model =>model.GuncellemeTarih)
+            </dt>
+            <dd class="col-10">
+                @Html.DisplayFor(model => model.GuncellemeTarih)
+            </dd>
+            <dt class="col-2">
+                @Html.DisplayNameFor(model =>model.GuncelleyenKullaniciAdi)
+            </dt>
+            <dd class="col-10">
+                @Html.DisplayFor(model => model.GuncelleyenKullaniciAdi)
+            </dd>
+        }
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Düzenle</a>&nbsp;|&nbsp;
+    <a asp-action="Index">Rol Listesi</a>
+</div>
+
+@{
+}

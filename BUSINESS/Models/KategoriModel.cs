@@ -13,6 +13,7 @@ namespace Business.Models
     public class KategoriModel : RecordBase
     {
         #region Entityden alınanlar
+
         [Required(ErrorMessage = "{0} gereklidir!")]
         [MinLength(1, ErrorMessage = "{0} en az {1} karakter olmalıdır!")]
         [MaxLength(22, ErrorMessage = "{0} en çok {1} karakter olmalıdır!")]
@@ -25,6 +26,16 @@ namespace Business.Models
         #region Sayfanın İhtiyacı
         [DisplayName("Yorum Sayısı")]
         public int YorumSayısı { get; set; }
+        #endregion
+
+        #region Ekranın ek ihtiyaçları
+        [DisplayName("Aktif")]
+        public string AktifMiDisplay { get; set; }
+        [DisplayName("Oluşturan Kullanıcı")]
+        public string OlusturanKullaniciAdi { get; set; }
+        [DisplayName("Güncelleyen Kullanıcı")]
+        public string GuncelleyenKullaniciAdi { get; set; }
+
         #endregion
     }
 }

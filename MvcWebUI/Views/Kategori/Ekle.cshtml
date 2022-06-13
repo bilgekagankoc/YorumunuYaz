@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Kategori Ekle";
+}
+<div class="container login-page">
+    <div class="row">
+        <div class="col-12">
+            <h2>@ViewData["Title"]</h2>
+            <form>
+                @Html.AntiForgeryToken()
+                <div class="form-outline mb-4">
+                    <input for="Ad" type="text" id="Ad" class="form-control" />
+                    <label for="Ad" class="form-label">Ad</label>
+                </div>
+                <div class="form-outline mb-4">
+                    <input for="Aciklama" type="text" id="Aciklama" class="form-control" />
+                    <label for="Aciklama"  class="form-label">Açıklama</label>
+                </div>
+                <a class="btn btn-primary btn-block mb-4" onclick="kategoriEkle()" >Kategori Kaydet</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+      function kategoriEkle(){
+          $.ajax({
+              dataType: "json",
+              url: "https://localhost:7016/Kategori/Ekle",
+              type: "post",
+              headers:
+              {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+               },
+              data:
+              JSON.stringify(
+              {
+                  "ad" :$("#Ad").val(),
+                  "aciklama" :$("#Aciklama").val(),
+                  "OlusturanKullaniciId" : $("#KullaniciId").val()
+              }),
+              success: function(sc)
+              {
+                  alertify
+                    .alert("Kategori başarıyla eklendi.", function(){
+                            alertify.message('OK');
+                            window.location.href = "https://localhost:7226/Kategori/Index";
+                    })
+                    .setHeader('<em> Mesaj </em> ');
+              },
+              error: function(err)
+              {
+                   alertify
+                    .alert("Kategori Eklenemedi" , function(){
+                      alertify.message('OK');
+                    }).
+                    setHeader('<em> Mesaj </em> ');
+              }
+          })
+      }
+
+
+
+
+</script>

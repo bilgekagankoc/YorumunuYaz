@@ -25,6 +25,7 @@ config.IdleTimeout = TimeSpan.FromMinutes(30);
 builder.Services.AddScoped<IKullaniciService, KullaniciService>();
 builder.Services.AddScoped<IRolService, RolService>();
 builder.Services.AddScoped<IHesapService, HesapService>();
+builder.Services.AddScoped<IKategoriService, KategoriService>();
 #endregion
 var app = builder.Build();
 

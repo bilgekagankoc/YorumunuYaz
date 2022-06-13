@@ -20,12 +20,23 @@ namespace Business.Services
 
     public class KategoriService : IKategoriService
     {
-        public RepoBase<Kategori, YorumunuYazContext> Repo { get; set; } = new Repo<Kategori, YorumunuYazContext>();
+        public RepoBase<Kategori, YorumunuYazContext> Repo { get; set; }
+
+        public RepoBase<Kullanici, YorumunuYazContext> _kullaniciService { get; set; }
+
+        public KategoriService()
+        {
+            YorumunuYazContext dbContext = new YorumunuYazContext();
+            Repo = new Repo<Kategori, YorumunuYazContext>(dbContext);
+            _kullaniciService = new Repo<Kullanici, YorumunuYazContext>(dbContext);
+        }
 
         public IQueryable<KategoriModel> Query()
         {
-            return Repo.Query("Yorumlar").OrderBy(x => x.Ad).Select(x => new KategoriModel()
+            return Repo.Query("Yorumlar").OrderBy(x => x.Id).Select(x => new KategoriModel()
             {
+                Id = x.Id,
+                Guid = x.Guid,
                 Aciklama = x.Aciklama,
                 Ad = x.Ad,
                 AktifMi = x.AktifMi,
@@ -34,14 +45,18 @@ namespace Business.Services
                 OlusturanKullaniciId = x.OlusturanKullaniciId,
                 Yorumlar = x.Yorumlar,
                 OlusturmaTarih = x.OlusturmaTarih,
-                YorumSayısı = x.Yorumlar.Count()
+                YorumSayısı = x.Yorumlar.Count(),
+                AktifMiDisplay = x.AktifMi ? "Aktif" : "Pasif",
+                OlusturanKullaniciAdi = _kullaniciService.Query().FirstOrDefault(x=>x.Id == x.OlusturanKullaniciId).KullaniciAdi,
+                GuncelleyenKullaniciAdi = _kullaniciService.Query().FirstOrDefault(x=>x.Id == x.GuncelleyenKullaniciId).KullaniciAdi
             });
+            
         }
 
         public Result Add(KategoriModel model)
         {
             if (Repo.Query().Any(r => r.Ad.ToLower() == model.Ad.ToLower().Trim()))
-                return new ErrorResult("Aynı Kategori Adına Sahip Rol Bulunmaktadır!");
+                return new ErrorResult("Aynı Kategori Adına Sahip Kategori Bulunmaktadır!");
             Kategori kategori = new Kategori()
             {
                 Aciklama = model.Aciklama,
@@ -60,7 +75,12 @@ namespace Business.Services
             if (Repo.Query().Any(r => r.Ad.ToLower() == model.Ad.ToLower().Trim() && r.Id != model.Id))
                 return new ErrorResult("Aynı Kategori Adına Sahip Kategori Bulunmaktadır!");
             Kategori entity = Repo.Query(x => x.Id == model.Id).FirstOrDefault();
-            return null;
+            entity.Ad = model.Ad;
+            entity.Aciklama = model.Aciklama;
+            entity.GuncelleyenKullaniciId = model.GuncelleyenKullaniciId;
+            entity.GuncellemeTarih = DateTime.Now;
+            Repo.Update(entity);
+            return new SuccessResult();
         }
 
         public Result Delete(int id)
