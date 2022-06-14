@@ -101,20 +101,59 @@ namespace DataAccess.Migrations
                         name: "FK_Yorumlar_Kategoriler_KategoriId",
                         column: x => x.KategoriId,
                         principalTable: "Kategoriler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Yorumlar_Kullanicilar_KullaniciId",
                         column: x => x.KullaniciId,
                         principalTable: "Kullanicilar",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "YorumCevaplar",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Cevap = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    KullaniciId = table.Column<int>(type: "int", nullable: false),
+                    YorumId = table.Column<int>(type: "int", nullable: false),
+                    Guid = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OlusturmaTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    OlusturanKullaniciId = table.Column<int>(type: "int", nullable: true),
+                    GuncellemeTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GuncelleyenKullaniciId = table.Column<int>(type: "int", nullable: true),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_YorumCevaplar", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_YorumCevaplar_Kullanicilar_KullaniciId",
+                        column: x => x.KullaniciId,
+                        principalTable: "Kullanicilar",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_YorumCevaplar_Yorumlar_YorumId",
+                        column: x => x.YorumId,
+                        principalTable: "Yorumlar",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Kullanicilar_RolId",
                 table: "Kullanicilar",
                 column: "RolId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_YorumCevaplar_KullaniciId",
+                table: "YorumCevaplar",
+                column: "KullaniciId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_YorumCevaplar_YorumId",
+                table: "YorumCevaplar",
+                column: "YorumId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Yorumlar_KategoriId",
@@ -129,6 +168,9 @@ namespace DataAccess.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "YorumCevaplar");
+
             migrationBuilder.DropTable(
                 name: "Yorumlar");
 

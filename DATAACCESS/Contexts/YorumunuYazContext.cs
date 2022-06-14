@@ -14,6 +14,7 @@ namespace DataAccess.Contexts
         public DbSet<Kullanici> Kullanicilar { get; set; }
         public DbSet<Kategori> Kategoriler { get; set; }
         public DbSet<Yorum> Yorumlar { get; set; }
+        public DbSet<YorumCevap> YorumCevaplar { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +35,9 @@ namespace DataAccess.Contexts
 
             modelBuilder.Entity<Kategori>()
                 .ToTable("Kategoriler");
+
+            modelBuilder.Entity<YorumCevap>()
+                .ToTable("YorumCevaplar");
         }
     }
 }

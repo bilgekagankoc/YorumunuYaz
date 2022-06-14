@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(YorumunuYazContext))]
-    [Migration("20220614095833_init")]
+    [Migration("20220614140916_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -204,6 +204,52 @@ namespace DataAccess.Migrations
                     b.ToTable("Yorumlar", (string)null);
                 });
 
+            modelBuilder.Entity("DataAccess.Entities.YorumCevap", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("AktifMi")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Cevap")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Guid")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("GuncellemeTarih")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("GuncelleyenKullaniciId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KullaniciId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OlusturanKullaniciId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("OlusturmaTarih")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("YorumId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KullaniciId");
+
+                    b.HasIndex("YorumId");
+
+                    b.ToTable("YorumCevaplar", (string)null);
+                });
+
             modelBuilder.Entity("DataAccess.Entities.Kullanici", b =>
                 {
                     b.HasOne("DataAccess.Entities.Rol", "Rol")
@@ -234,6 +280,25 @@ namespace DataAccess.Migrations
                     b.Navigation("Kullanici");
                 });
 
+            modelBuilder.Entity("DataAccess.Entities.YorumCevap", b =>
+                {
+                    b.HasOne("DataAccess.Entities.Kullanici", "Kullanici")
+                        .WithMany()
+                        .HasForeignKey("KullaniciId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataAccess.Entities.Yorum", "Yorum")
+                        .WithMany("YorumCevaplar")
+                        .HasForeignKey("YorumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Kullanici");
+
+                    b.Navigation("Yorum");
+                });
+
             modelBuilder.Entity("DataAccess.Entities.Kategori", b =>
                 {
                     b.Navigation("Yorumlar");
@@ -247,6 +312,11 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.Rol", b =>
                 {
                     b.Navigation("Kullanicilar");
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.Yorum", b =>
+                {
+                    b.Navigation("YorumCevaplar");
                 });
 #pragma warning restore 612, 618
         }

@@ -36,6 +36,10 @@ namespace Business.Models
         public string KategoriAdDisplay { get; set; }
         [DisplayName("Oluşturan Kullanıcı")]
         public string OlusturanKullaniciAdiDisplay { get; set; }
+        [DisplayName("Güncelleyen Kullanıcı")]
+        public string GüncelleyenKullaniciAdiDisplay { get; set; }
+        [DisplayName("Cevap Sayisi")]
+        public int CevapSayisiDisplay { get; set; }
 
         #endregion
     }

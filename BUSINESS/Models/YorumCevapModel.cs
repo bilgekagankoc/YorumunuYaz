@@ -27,8 +27,7 @@ namespace Business.Models
         #region Sayfanın ekstra ihtiyaçları
         [DisplayName("Oluşturan Kullanıcı")]
         public string OlusturanKullaniciAdiDisplay { get; set; }
-        [DisplayName("Cevap Sayisi")]
-        public int CevapSayisiDisplay { get; set; }
+
         #endregion
     }
 }

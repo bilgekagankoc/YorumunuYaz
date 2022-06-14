@@ -24,5 +24,6 @@ namespace DataAccess.Entities
         public Kategori Kategori { get; set; }
         public int KullaniciId { get; set; }
         public Kullanici Kullanici { get; set; }
+        public List<YorumCevap> YorumCevaplar { get; set; }
     }
 }
