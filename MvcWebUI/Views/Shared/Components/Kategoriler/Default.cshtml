@@ -1,0 +1,17 @@
+﻿@model List<KategoriModel>
+@{
+
+}
+
+@foreach(var kateogori in Model)
+{
+<li class="nav-item">
+    <a class="nav-link" href="charts.html">
+        <i class="fa-fw fas fa-align-justify"></i>
+        <span>@kateogori.Ad</span>
+    </a>
+</li>
+}
+
+
+
