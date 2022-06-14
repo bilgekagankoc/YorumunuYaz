@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Business.Services
 {
-    public interface IYorumService : IService<YorumModel,Yorum,YorumunuYazContext>
+    public interface IYorumService : IService<YorumModel, Yorum, YorumunuYazContext>
     {
 
     }
@@ -52,7 +52,7 @@ namespace Business.Services
                 OlusturanKullaniciAdiDisplay = _kullaniciService.Query().FirstOrDefault(k => k.Id == x.OlusturanKullaniciId).KullaniciAdi,
                 GüncelleyenKullaniciAdiDisplay = _kullaniciService.Query().FirstOrDefault(k => k.Id == x.GuncelleyenKullaniciId).KullaniciAdi,
                 CevapSayisiDisplay = x.YorumCevaplar.Select(x => x.YorumId == x.Id).Count()
-            }); 
+            });
         }
 
         public Result Add(YorumModel model)
@@ -62,7 +62,7 @@ namespace Business.Services
             Yorum entity = new Yorum()
             {
                 AktifMi = true,
-                Baslik = model.Baslik.ToUpper(),
+                Baslik = model.Baslik.ToUpper().Trim(),
                 Guid = Guid.NewGuid().ToString(),
                 Icerik = model.Icerik,
                 ImajDosyaUzantisi = model.ImajDosyaUzantisi,
@@ -70,7 +70,8 @@ namespace Business.Services
                 KullaniciId = model.OlusturanKullaniciId.Value,
                 OlusturanKullaniciId = model.OlusturanKullaniciId,
                 OlusturmaTarih = DateTime.Now,
-            };
+            };,
+            Repo.Add(entity);
             return new SuccessResult();
         }
 
@@ -79,12 +80,13 @@ namespace Business.Services
             if (Repo.Query().Any(r => r.Baslik.ToLower() == model.Baslik.ToLower().Trim() && r.Id != model.Id))
                 return new ErrorResult("Değiştirmek İstediğiniz Başlık Mevcut. Farklı Bir Başlık Giriniz.");
             Yorum entity = Repo.Query().FirstOrDefault(x => x.Id == model.Id);
-                entity.Baslik = model.Baslik;
-                entity.Icerik = model.Icerik;
-                entity.GuncellemeTarih = DateTime.Now;
-                entity.GuncelleyenKullaniciId = model.GuncelleyenKullaniciId;
-                Repo.Update(entity);
-                return new SuccessResult();
+            entity.Baslik = model.Baslik.ToUpper().Trim();
+            entity.Icerik = model.Icerik;
+            entity.GuncellemeTarih = DateTime.Now;
+            entity.GuncelleyenKullaniciId = model.GuncelleyenKullaniciId;
+            Repo.Update(entity);
+            Repo.Update(entity);
+            return new SuccessResult();
         }
 
         public Result Delete(int id)

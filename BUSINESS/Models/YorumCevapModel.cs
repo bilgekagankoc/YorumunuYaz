@@ -27,6 +27,8 @@ namespace Business.Models
         #region Sayfanın ekstra ihtiyaçları
         [DisplayName("Oluşturan Kullanıcı")]
         public string OlusturanKullaniciAdiDisplay { get; set; }
+        [DisplayName("Güncelleyen Kullanıcı")]
+        public string GüncelleyenKullaniciAdiDisplay { get; set; }
 
         #endregion
     }

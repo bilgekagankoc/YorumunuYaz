@@ -72,8 +72,7 @@ namespace DataAccess.Migrations
                         name: "FK_Kullanicilar_Roller_RolId",
                         column: x => x.RolId,
                         principalTable: "Roller",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -132,7 +131,8 @@ namespace DataAccess.Migrations
                         name: "FK_YorumCevaplar_Kullanicilar_KullaniciId",
                         column: x => x.KullaniciId,
                         principalTable: "Kullanicilar",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_YorumCevaplar_Yorumlar_YorumId",
                         column: x => x.YorumId,
