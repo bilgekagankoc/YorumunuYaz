@@ -18,10 +18,11 @@ namespace DataAccess.Migrations
                     Ad = table.Column<string>(type: "nvarchar(22)", maxLength: 22, nullable: false),
                     Aciklama = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Guid = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OlusturmaTarih = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OlusturanKullaniciId = table.Column<int>(type: "int", nullable: false),
-                    GuncellemeTarih = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GuncelleyenKullaniciId = table.Column<int>(type: "int", nullable: false)
+                    OlusturmaTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    OlusturanKullaniciId = table.Column<int>(type: "int", nullable: true),
+                    GuncellemeTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GuncelleyenKullaniciId = table.Column<int>(type: "int", nullable: true),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,10 +37,11 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Adi = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Guid = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OlusturmaTarih = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OlusturanKullaniciId = table.Column<int>(type: "int", nullable: false),
-                    GuncellemeTarih = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GuncelleyenKullaniciId = table.Column<int>(type: "int", nullable: false)
+                    OlusturmaTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    OlusturanKullaniciId = table.Column<int>(type: "int", nullable: true),
+                    GuncellemeTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GuncelleyenKullaniciId = table.Column<int>(type: "int", nullable: true),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,13 +57,13 @@ namespace DataAccess.Migrations
                     KullaniciAdi = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Sifre = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     ePosta = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AktifMi = table.Column<bool>(type: "bit", nullable: false),
                     RolId = table.Column<int>(type: "int", nullable: false),
                     Guid = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OlusturmaTarih = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OlusturanKullaniciId = table.Column<int>(type: "int", nullable: false),
-                    GuncellemeTarih = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GuncelleyenKullaniciId = table.Column<int>(type: "int", nullable: false)
+                    OlusturmaTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    OlusturanKullaniciId = table.Column<int>(type: "int", nullable: true),
+                    GuncellemeTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GuncelleyenKullaniciId = table.Column<int>(type: "int", nullable: true),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,10 +88,11 @@ namespace DataAccess.Migrations
                     KategoriId = table.Column<int>(type: "int", nullable: false),
                     KullaniciId = table.Column<int>(type: "int", nullable: false),
                     Guid = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OlusturmaTarih = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OlusturanKullaniciId = table.Column<int>(type: "int", nullable: false),
-                    GuncellemeTarih = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GuncelleyenKullaniciId = table.Column<int>(type: "int", nullable: false)
+                    OlusturmaTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    OlusturanKullaniciId = table.Column<int>(type: "int", nullable: true),
+                    GuncellemeTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GuncelleyenKullaniciId = table.Column<int>(type: "int", nullable: true),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
