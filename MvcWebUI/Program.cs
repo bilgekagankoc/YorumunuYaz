@@ -26,6 +26,8 @@ builder.Services.AddScoped<IKullaniciService, KullaniciService>();
 builder.Services.AddScoped<IRolService, RolService>();
 builder.Services.AddScoped<IHesapService, HesapService>();
 builder.Services.AddScoped<IKategoriService, KategoriService>();
+builder.Services.AddScoped<IYorumService, YorumService>();
+builder.Services.AddScoped<IYorumCevapService, YorumCevapService>();
 #endregion
 var app = builder.Build();
 

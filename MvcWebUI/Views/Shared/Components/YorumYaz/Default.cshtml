@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="row d-flex justify-content-center">
+    <div class="accordion" id="accordionPanels" style="max-width: 30rem;">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Yorum Yaz
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="row d-flex justify-content-center">
+                        <div class="card border-0">
+                            <form asp-controller="Yorum" asp-action="YorumYaz">
+                                <div class="card-header">
+                                    <label class="form-label">Kategoriler</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Başlık">
+                                </div>
+                                <div class="card-body text-primary">
+                                    <div>
+                                        <label class="form-label">Yorum</label>
+                                        <textarea class="form-control" id="YorumIcerik" rows="3"></textarea>
+                                    </div>
+                                    <div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Kategoriler</label>
+                                            <select class="form-select">
+                                                <option>Disabled select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <button type="submit" class="btn-sm btn-primary">Yorum Yaz</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

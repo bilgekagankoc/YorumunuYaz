@@ -194,7 +194,10 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @await Component.InvokeAsync("YorumYaz")
+                    }
                     @RenderBody()
 
                 </div>

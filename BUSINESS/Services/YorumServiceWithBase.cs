@@ -70,7 +70,7 @@ namespace Business.Services
                 KullaniciId = model.OlusturanKullaniciId.Value,
                 OlusturanKullaniciId = model.OlusturanKullaniciId,
                 OlusturmaTarih = DateTime.Now,
-            };,
+            };
             Repo.Add(entity);
             return new SuccessResult();
         }
