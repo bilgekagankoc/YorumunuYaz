@@ -21,18 +21,37 @@
                 <tbody>
                     @foreach (var kullanici in Model)
                     {
-                        <tr>
-                            <th scope="row">@kullanici.Id</th>
-                            <td>@kullanici.KullaniciAdi</td>
-                            <td>@kullanici.ePosta</td>
-                            <td>@kullanici.RolAdiDisplay</td>
-                            <td>@kullanici.AktifDisplay</td>
-                            <td>
-                                <a class="btn btn-primary btn-sm" asp-action="Sil">Sil</a>
-                                <a class="btn btn-primary btn-sm" asp-action="Duzenle" asp-route-id="@kullanici.Id" >Düzenle</a>
-                                <a class="btn btn-primary btn-sm" asp-action="Detay">Detay</a>
-                            </td>
-                        </tr>
+                        if (kullanici.AktifMi)
+                        {
+                            <tr>
+                                <th scope="row">@kullanici.Id</th>
+                                <td>@kullanici.KullaniciAdi</td>
+                                <td>@kullanici.ePosta</td>
+                                <td>@kullanici.RolAdiDisplay</td>
+                                <td>@kullanici.AktifDisplay</td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm" asp-action="SoftDelete" asp-route-id="@kullanici.Id">Sil</a>
+                                    <a class="btn btn-primary btn-sm" asp-action="Duzenle" asp-route-id="@kullanici.Id">Düzenle</a>
+                                    <a class="btn btn-primary btn-sm" asp-action="Detay" asp-route-id="@kullanici.Id">Detay</a>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="table-danger">
+                                <th scope="row">@kullanici.Id</th>
+                                <td>@kullanici.KullaniciAdi</td>
+                                <td>@kullanici.ePosta</td>
+                                <td>@kullanici.RolAdiDisplay</td>
+                                <td>@kullanici.AktifDisplay</td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm" asp-action="SoftDelete" asp-route-id="@kullanici.Id">Sil</a>
+                                    <a class="btn btn-primary btn-sm" asp-action="Duzenle" asp-route-id="@kullanici.Id">Düzenle</a>
+                                    <a class="btn btn-primary btn-sm" asp-action="Detay" asp-route-id="@kullanici.Id">Detay</a>
+                                </td>
+                            </tr>
+                        }
+
                     }
                 </tbody>
             </table>

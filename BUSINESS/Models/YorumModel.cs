@@ -40,6 +40,10 @@ namespace Business.Models
         public string GüncelleyenKullaniciAdiDisplay { get; set; }
         [DisplayName("Cevap Sayisi")]
         public int CevapSayisiDisplay { get; set; }
+        [DisplayName("Imaj Yolu")]
+        public string ImajYoluDisplay { get; set; }
+        [DisplayName("Oluşturma Tarihi")]
+        public string OlusturmaTarihiDisplay { get; set; }
 
         #endregion
     }

@@ -40,8 +40,8 @@ namespace MvcWebUI.Controllers
             else
             {
                 TempData["Result"] = "danger";
-                TempData["Message"] = $"Rol Silme İşlemi Başarısız {result.Message}";
-                return RedirectToAction("Index", "Rol");
+                TempData["Message"] = $"Kategori Silme İşlemi Başarısız {result.Message}";
+                return RedirectToAction("Index", "Kategori");
             }
         }
 

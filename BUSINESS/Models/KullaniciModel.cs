@@ -42,6 +42,10 @@ namespace Business.Models
 
         [DisplayName("Aktif")]
         public string AktifDisplay { get; set; }
+        [DisplayName("Yorum Sayısı")]
+        public int YorumSayisi { get; set; }
+        [DisplayName("Yorum Cevap Sayısı")]
+        public int YorumCevapSayisi { get; set; }
         #endregion
 
         public override string ToString()

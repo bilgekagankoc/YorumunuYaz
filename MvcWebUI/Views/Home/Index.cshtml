@@ -1,8 +1,33 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model YorumViewModel
+@if (User.Identity.IsAuthenticated)
+{
+    @await Component.InvokeAsync("YorumYaz")
 }
 
-@*<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>*@
+@if (Model.YorumModels.Count > 0)
+{<h3 class="text-center">@Model.MevcutKategori</h3>
+    @foreach (var item in Model.YorumModels)
+    {
+        <div class="col">
+            
+            <div class="card yorum">
+                <span class="p-3">@item.OlusturmaTarihiDisplay</span>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                {
+                    <a asp-controller="Yorum" asp-action="SoftDelete" asp-route-id="@item.Id" class="ml-1">
+                        <i class="fa fa-times text-end mr-5"></i>
+                    </a>
+                }
+                @if (@item.ImajYoluDisplay != null)
+                {
+                    <img src="@item.ImajYoluDisplay" class="card-img-top" alt="Yorum Fotoğrafı">
+                }
+                <div class="card-body">
+                    <h5 class="card-title"><a asp-action="Detay" asp-controller="Yorum" asp-route-id="@item.Id">@item.Baslik</a></h5>
+                    <p class="card-text">@item.Icerik</p>
+                </div>
+            </div>
+        </div>
+    }
+}
+

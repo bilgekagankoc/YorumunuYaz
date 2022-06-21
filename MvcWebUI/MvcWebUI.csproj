@@ -25,4 +25,8 @@
     <ProjectReference Include="..\DATAACCESS\DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\dosyalar\yorumlar\" />
+  </ItemGroup>
+
 </Project>

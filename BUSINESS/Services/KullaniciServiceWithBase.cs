@@ -23,17 +23,23 @@ namespace Business.Services
     {
         public RepoBase<Kullanici, YorumunuYazContext> Repo { get; set; }
         public RepoBase<Rol,YorumunuYazContext> _rolRepo { get; set; }
+        public RepoBase<Yorum, YorumunuYazContext> _yorumRepo { get; set; }
+        public RepoBase<YorumCevap, YorumunuYazContext> _yorumCevapRepo { get; set; }
 
         public KullaniciService()
         {
             YorumunuYazContext dbContext = new YorumunuYazContext();
             Repo = new Repo<Kullanici, YorumunuYazContext>(dbContext);
             _rolRepo = new Repo<Rol, YorumunuYazContext>(dbContext);
+            _yorumRepo = new Repo<Yorum, YorumunuYazContext>(dbContext);
+            _yorumCevapRepo = new Repo<YorumCevap, YorumunuYazContext>(dbContext);
         }
         public IQueryable<KullaniciModel> Query()
         {
             var rolQuery = _rolRepo.Query();
             var kullaniciQuery = Repo.Query();
+            var yorumQuery = _yorumRepo.Query();
+            var yorumCevapQuery = _yorumCevapRepo.Query();
 
             var query = from kullanici in kullaniciQuery
                         join rol in rolQuery on kullanici.RolId equals rol.Id
@@ -49,6 +55,9 @@ namespace Business.Services
                             Sifre = kullanici.Sifre,
                             ePosta = kullanici.ePosta,
                             Guid = kullanici.Guid,
+                            YorumCevapSayisi = yorumCevapQuery.Where(x => x.OlusturanKullaniciId == kullanici.Id).Count(),
+                            YorumSayisi = yorumQuery.Where(x => x.OlusturanKullaniciId == kullanici.Id).Count(),
+                            OlusturmaTarih = kullanici.OlusturmaTarih
                         };
             return query;
         }
@@ -66,7 +75,8 @@ namespace Business.Services
                 KullaniciAdi = model.KullaniciAdi,
                 RolId = model.RolId.Value,
                 Sifre = model.Sifre,
-                Guid = Guid.NewGuid().ToString()
+                Guid = Guid.NewGuid().ToString(),
+                OlusturmaTarih = DateTime.Now
             };
             Repo.Add(entity);
             return new SuccessResult();
@@ -95,12 +105,19 @@ namespace Business.Services
 
         public Result Delete(int id)
         {
-            throw new NotImplementedException();
+            Kullanici entity = Repo.Query(r => r.Id == id,new string[] { "Yorum","YorumCevap" } ).SingleOrDefault();
+            if (entity.Yorumlar != null && entity.Yorumlar.Count > 0)
+                return new ErrorResult("Silinmek istenen Kullanıcının girdiği yorumlar bulunmaktadır!");
+            Repo.Delete(entity);
+            return new SuccessResult();
         }
 
         public Result SoftDelete(int id)
         {
-            throw new NotImplementedException();
+            var entity = Repo.Query(x => x.Id == id).FirstOrDefault();
+            entity.AktifMi = false;
+            Repo.Update(entity);
+            return new SuccessResult();
         }
 
         public void Dispose()

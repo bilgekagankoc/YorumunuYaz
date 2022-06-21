@@ -59,6 +59,36 @@ namespace MvcWebUI.Controllers
             ViewBag.RolId = new SelectList(roller.Data, "Id", "Adi", model.RolId.Value);
             return View(model);
         }
+
+        public IActionResult SoftDelete(int? id)
+        {
+            var result = _kullaniciService.SoftDelete(id.Value);
+            if (result.IsSuccessful)
+            {
+                TempData["Result"] = "success";
+                TempData["Message"] = "İşlem Başarılı";
+                return RedirectToAction("Index", "Kullanici");
+            }
+            else
+            {
+                TempData["Result"] = "danger";
+                TempData["Message"] = $"İşlem Başarısız {result.Message}";
+                return RedirectToAction("Index", "Kullanici");
+            }
+            return RedirectToAction("Index", "Kullanici");
+        }
+
+        public IActionResult Detay(int? id)
+        {
+                var model = _kullaniciService.Query().FirstOrDefault(x => x.Id == id);
+                if (model == null)
+                {
+                    TempData["Result"] = "danger";
+                    TempData["Message"] = "Kullanıcı Bulunamadı";
+                    return RedirectToAction("Index", "Kategori");
+                }
+                return View(model);
+        }
         // TODO detay yapılacak girdiği mesaj istatistikleri ile beraber -- sil yapılacak
     }
 }

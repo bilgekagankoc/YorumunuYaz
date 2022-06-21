@@ -29,6 +29,7 @@ namespace Business.Models
         public string OlusturanKullaniciAdiDisplay { get; set; }
         [DisplayName("Güncelleyen Kullanıcı")]
         public string GüncelleyenKullaniciAdiDisplay { get; set; }
+        public string OlusturmaTarihDisplay { get; set; }
 
         #endregion
     }

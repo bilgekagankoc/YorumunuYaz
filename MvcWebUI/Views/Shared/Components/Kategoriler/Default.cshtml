@@ -6,9 +6,9 @@
 @foreach(var kateogori in Model)
 {
 <li class="nav-item">
-    <a class="nav-link" href="charts.html">
+    <a class="nav-link" asp-action="Kategori" asp-controller="Home" asp-route-id="@kateogori.Id">
         <i class="fa-fw fas fa-align-justify"></i>
-        <span>@kateogori.Ad</span>
+        <span >@kateogori.Ad</span>
     </a>
 </li>
 }

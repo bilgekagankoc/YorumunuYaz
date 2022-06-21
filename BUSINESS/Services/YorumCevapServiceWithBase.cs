@@ -45,8 +45,10 @@ namespace Business.Services
                 KullaniciId = x.KullaniciId,
                 Kullanici = x.Kullanici,
                 OlusturanKullaniciAdiDisplay = _kullaniciService.Query().FirstOrDefault(k => k.Id == x.OlusturanKullaniciId).KullaniciAdi,
-                GüncelleyenKullaniciAdiDisplay = _kullaniciService.Query().FirstOrDefault(k => k.Id == x.GuncelleyenKullaniciId).KullaniciAdi
-            });
+                GüncelleyenKullaniciAdiDisplay = _kullaniciService.Query().FirstOrDefault(k => k.Id == x.GuncelleyenKullaniciId).KullaniciAdi,
+                Id = x.Id,
+                OlusturmaTarihDisplay = x.OlusturmaTarih.Value.ToString("MM/dd/yyyy")
+            }); ;
         }
 
         public Result Add(YorumCevapModel model)
@@ -84,7 +86,10 @@ namespace Business.Services
 
         public Result SoftDelete(int id)
         {
-            throw new NotImplementedException();
+            var entity = Repo.Query(x => x.Id == id).FirstOrDefault();
+            entity.AktifMi = false;
+            Repo.Update(entity);
+            return new SuccessResult();
         }
 
         public void Dispose()

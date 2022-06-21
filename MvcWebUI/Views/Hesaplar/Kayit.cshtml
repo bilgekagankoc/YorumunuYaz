@@ -34,7 +34,7 @@
                 @if(User.Identity.IsAuthenticated && User.IsInRole("admin"))
                 {
                     <div class="form-outline mb-4">
-                     <select asp-for="Rol" class="form-control" id="sehirler" asp-items="ViewBag.RolId">
+                     <select asp-for="Rol" class="form-control" id="roller" asp-items="ViewBag.RolId">
                         <option value="">-- Rol Seçiniz --</option>
                     </select>
                     <label asp-for="Rol" class="form-label" for="form2Example1"></label>

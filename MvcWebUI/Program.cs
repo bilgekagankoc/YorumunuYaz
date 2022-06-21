@@ -1,5 +1,6 @@
 using Business.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MvcWebUI.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,9 @@ builder.Services.AddScoped<IKategoriService, KategoriService>();
 builder.Services.AddScoped<IYorumService, YorumService>();
 builder.Services.AddScoped<IYorumCevapService, YorumCevapService>();
 #endregion
+
+IConfigurationSection section = builder.Configuration.GetSection(nameof(AppSettings));
+section.Bind(new AppSettings()); // AppSettings class'ýný MVC projemizde Settings klasörü altýnda appsettings.json'daki AppSettings section'ý ile ayný yapýda oluþturuyoruz.
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

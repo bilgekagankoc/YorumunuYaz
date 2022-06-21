@@ -85,7 +85,7 @@ namespace Business.Services
 
         public Result Delete(int id)
         {
-            Kategori entity = Repo.Query(x => x.Id == id).FirstOrDefault();
+            Kategori entity = Repo.Query("Yorumlar").FirstOrDefault(x => x.Id == id);
             if (entity.Yorumlar != null && entity.Yorumlar.Count > 0)
                 return new ErrorResult("Silinmek istenen kategoride yorumlar vardır");
             Repo.Delete(entity);

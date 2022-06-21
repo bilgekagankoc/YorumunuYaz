@@ -1,0 +1,61 @@
+﻿@model YorumViewModel
+@{
+
+}
+
+
+<div class="col-12">
+    <div class="card">
+        <span class="p-3">@Model.YorumModel.OlusturanKullaniciAdiDisplay</span>
+        @if (@Model.YorumModel.ImajYoluDisplay != null)
+        {
+            <img src="@Model.YorumModel.ImajYoluDisplay" class="card-img-top" alt="Yorum Fotoğrafı">
+        }
+        <div class="card-body">
+            <h5 class="card-title">@Model.YorumModel.Baslik</h5>
+            <p class="card-text">@Model.YorumModel.Icerik</p>
+        </div>
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="card mt-3">
+            <form asp-controller="YorumCevap" asp-action="YorumCevapYaz">
+                <input type="hidden" asp-for="@Model.YorumCevap.YorumId" value="@Model.YorumModel.Id" />
+                @Html.AntiForgeryToken()
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Cevap</label>
+                        <textarea asp-for="YorumCevap.Cevap" class="form-control" id="Yorum" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn-sm btn-primary">Cevap Yaz</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    @if (Model.YorumCevaplar != null && Model.YorumCevaplar.Count > 0)
+    {
+        @foreach (var item in Model.YorumCevaplar)
+        {
+            <div class="card mt-3">
+                @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                {
+                    <a asp-controller="YorumCevap" asp-action="SoftDelete" asp-route-id1="@item.Id" asp-route-id2="@Model.YorumModel.Id" class="ml-1">
+                        <i class="fa fa-times text-end mr-5"></i>
+                    </a>
+                }
+                <div class="card-body">
+                    <span class="p-3">@item.OlusturanKullaniciAdiDisplay</span>
+                    <span class="p-3">@item.OlusturmaTarihDisplay</span>
+                    <div class="mb-3">
+                        <div class="card-text">
+                            @item.Cevap
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+</div>

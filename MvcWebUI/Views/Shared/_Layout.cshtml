@@ -34,7 +34,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-controller="Home">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-controller="Home" asp-action="Index">
 
                 <div class="sidebar-brand-text mx-3">YORUMUNU <sup>YAZ</sup></div>
             </a>
@@ -194,11 +194,10 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        @await Component.InvokeAsync("YorumYaz")
-                    }
-                    @RenderBody()
+                    <div class="row">
+                           @RenderBody()
+                    </div>
+                 
 
                 </div>
                 <!-- /.container-fluid -->

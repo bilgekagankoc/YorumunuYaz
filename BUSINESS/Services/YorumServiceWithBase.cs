@@ -51,25 +51,27 @@ namespace Business.Services
                 OlusturanKullaniciId = x.OlusturanKullaniciId,
                 OlusturanKullaniciAdiDisplay = _kullaniciService.Query().FirstOrDefault(k => k.Id == x.OlusturanKullaniciId).KullaniciAdi,
                 GüncelleyenKullaniciAdiDisplay = _kullaniciService.Query().FirstOrDefault(k => k.Id == x.GuncelleyenKullaniciId).KullaniciAdi,
-                CevapSayisiDisplay = x.YorumCevaplar.Select(x => x.YorumId == x.Id).Count()
+                CevapSayisiDisplay = x.YorumCevaplar.Select(x => x.YorumId == x.Id).Count(),
+                ImajYoluDisplay = string.IsNullOrWhiteSpace(x.ImajDosyaUzantisi) ? null : "/dosyalar/yorumlar/" + x.Guid + x.ImajDosyaUzantisi,
+                OlusturmaTarihiDisplay = x.OlusturmaTarih.Value.ToString("MM/dd/yyyy")
             });
         }
 
         public Result Add(YorumModel model)
         {
-            if (Repo.Query().Any(r => r.Baslik.ToLower() == model.Baslik.ToLower().Trim()))
-                return new ErrorResult("Aynı İçeriğe Sahip İçerik Mevcut. Mevcut İçeriğe Cevap Yazabilirsiniz.");
+            if (Repo.Query().Any(r => r.Baslik.ToLower() == model.Baslik.ToLower().Trim() && r.KategoriId == model.KategoriId))
+                return new ErrorResult("Bu Kategoride Aynı İçeriğe Sahip Başlık Mevcut. Mevcut İçeriğe Cevap Yazabilirsiniz.");
             Yorum entity = new Yorum()
             {
                 AktifMi = true,
                 Baslik = model.Baslik.ToUpper().Trim(),
-                Guid = Guid.NewGuid().ToString(),
                 Icerik = model.Icerik,
                 ImajDosyaUzantisi = model.ImajDosyaUzantisi,
                 KategoriId = model.KategoriId,
                 KullaniciId = model.OlusturanKullaniciId.Value,
                 OlusturanKullaniciId = model.OlusturanKullaniciId,
                 OlusturmaTarih = DateTime.Now,
+                Guid = model.Guid
             };
             Repo.Add(entity);
             return new SuccessResult();
@@ -100,7 +102,10 @@ namespace Business.Services
 
         public Result SoftDelete(int id)
         {
-            throw new NotImplementedException();
+            var entity = Repo.Query(x => x.Id == id).FirstOrDefault();
+            entity.AktifMi = false;
+            Repo.Update(entity);
+            return new SuccessResult();
         }
 
         public void Dispose()

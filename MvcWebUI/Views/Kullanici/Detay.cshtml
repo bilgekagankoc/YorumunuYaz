@@ -1,0 +1,61 @@
+﻿@model KullaniciModel
+@{
+
+}
+
+<div>
+    <h4 class="mb-3">Rol</h4>
+    <dl class="row">
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.KullaniciAdi)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.KullaniciAdi)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.ePosta)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.ePosta)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model =>model.RolAdiDisplay)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.RolAdiDisplay)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model =>model.YorumSayisi)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.YorumSayisi)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model =>model.YorumCevapSayisi)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.YorumCevapSayisi)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model =>model.OlusturmaTarih)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.OlusturmaTarih)
+        </dd>
+        @if (Model.GuncellemeTarih != null)
+        {
+            <dt class="col-2">
+                @Html.DisplayNameFor(model =>model.GuncellemeTarih)
+            </dt>
+            <dd class="col-10">
+                @Html.DisplayFor(model => model.GuncellemeTarih)
+            </dd>
+        }
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Duzenle" asp-route-id="@Model?.Id">Düzenle</a>&nbsp;|&nbsp;
+    <a asp-action="Index">Kullanici Listesi</a>
+</div>
+
