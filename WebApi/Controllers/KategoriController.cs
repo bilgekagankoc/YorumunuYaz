@@ -28,6 +28,15 @@ namespace WebApi.Controllers
             return Ok(model); // 200
         }
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var model = _kategoriService.Query().ToList();
+            if (model.Count == 0)
+                return NotFound(); // 404
+            return Ok(model); // 200
+        }
+
         [HttpPost("Ekle")]
         public IActionResult Ekle(KategoriModel model)
         {
@@ -37,6 +46,24 @@ namespace WebApi.Controllers
                 return CreatedAtAction("Get", new { id = model.Id }, model);
             }
             return BadRequest(result.Message);
+        }
+
+        [HttpPut]
+        public IActionResult Put(KategoriModel model)
+        {
+            var result = _kategoriService.Update(model);
+            if (result.IsSuccessful)
+                return Ok(model); // 200
+            return BadRequest(result.Message); // 400
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var result = _kategoriService.Delete(id);
+            if (result.IsSuccessful)
+                return Ok(id); // 200
+            return BadRequest(result.Message); // 400
         }
 
     }
