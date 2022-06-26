@@ -9,5 +9,7 @@ namespace MvcWebUI.Models
         public YorumCevapModel YorumCevap { get; set; }
         public List<YorumCevapModel> YorumCevaplar { get; set; }
         public string MevcutKategori { get; set; }
+        public KullaniciModel Kullanici { get; set; }
+        public List<KullaniciModel> Kullanicilar { get; set; }
     }
 }

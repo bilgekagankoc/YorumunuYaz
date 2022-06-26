@@ -17,51 +17,47 @@ namespace MvcWebUI.Controllers
                 var rol = dbcontext.Roller.ToList();
                 dbcontext.Roller.RemoveRange(rol);
 
+
                 dbcontext.Database.ExecuteSqlRaw("dbcc CHECKIDENT ('Kullanicilar', RESEED, 0)");
                 dbcontext.Database.ExecuteSqlRaw("dbcc CHECKIDENT ('Roller', RESEED, 0)");
 
-                List<Kullanici> kullanicilar = new List<Kullanici>()
+                dbcontext.Roller.Add(new Rol()
                 {
-                    new Kullanici()
-                    {
-                        AktifMi=true,
-                        KullaniciAdi="escepto",
-                        Guid=Guid.NewGuid().ToString(),
-                        Sifre="122333",
-                        ePosta ="asd@asd.com",
-                        OlusturanKullaniciId=1,
-                        OlusturmaTarih=DateTime.Now,
-                        RolId=1,
-                        Rol=new Rol()
-                            {
-                            Adi="admin",
-                            Guid=Guid.NewGuid().ToString(),
-                            AktifMi = true,
-                            OlusturanKullaniciId=1,
-                            OlusturmaTarih = DateTime.Now
-                        },
-                    },
-                    new Kullanici()
-                    {
-                        AktifMi=true,
-                        KullaniciAdi="konix",
-                        ePosta ="asd@asdasd.com",
-                        Guid=Guid.NewGuid().ToString(),
-                        Sifre="122333",
-                        OlusturanKullaniciId=1,
-                        OlusturmaTarih=DateTime.Now,
-                        RolId=2,
-                        Rol=new Rol()
-                            {
-                            Adi="kullanici",
-                            AktifMi = true,
-                            Guid=Guid.NewGuid().ToString(),
-                            OlusturanKullaniciId=1,
-                            OlusturmaTarih = DateTime.Now
-                        }
-                    }
-                };
-                Kategori k1 = new Kategori()
+                    Adi = "admin",
+                    Guid = Guid.NewGuid().ToString(),
+                    AktifMi = true,
+                    OlusturmaTarih = DateTime.Now
+                });
+                dbcontext.Roller.Add(new Rol()
+                {
+                    Adi = "kulanici",
+                    Guid = Guid.NewGuid().ToString(),
+                    AktifMi = true,
+                    OlusturmaTarih = DateTime.Now
+                });
+                dbcontext.SaveChanges();
+                dbcontext.Kullanicilar.Add(new Kullanici()
+                {
+                    AktifMi = true,
+                    KullaniciAdi = "escepto",
+                    Guid = Guid.NewGuid().ToString(),
+                    Sifre = "122333",
+                    ePosta = "asd@asd.com",
+                    OlusturmaTarih = DateTime.Now,
+                    RolId = 1,
+                });
+                dbcontext.Kullanicilar.Add(new Kullanici()
+                {
+                    AktifMi = true,
+                    KullaniciAdi = "konix",
+                    ePosta = "asd@asdasd.com",
+                    Guid = Guid.NewGuid().ToString(),
+                    Sifre = "122333",
+                    OlusturmaTarih = DateTime.Now,
+                    RolId = 2,
+                });
+                dbcontext.SaveChanges();
+                dbcontext.Kategoriler.Add(new Kategori()
                 {
                     Aciklama = "Otomotiv hakkında herşey",
                     Ad = "Otomotiv",
@@ -69,8 +65,8 @@ namespace MvcWebUI.Controllers
                     AktifMi = true,
                     OlusturanKullaniciId = 1,
                     OlusturmaTarih = DateTime.Now,
-                };
-                Kategori k2 = new Kategori()
+                });
+                dbcontext.Kategoriler.Add(new Kategori()
                 {
                     Aciklama = "Elektronik hakkında herşey",
                     Ad = "Elektronik",
@@ -78,13 +74,8 @@ namespace MvcWebUI.Controllers
                     AktifMi = true,
                     OlusturanKullaniciId = 2,
                     OlusturmaTarih = DateTime.Now,
-                };
-                foreach (var item in kullanicilar)
-                {
-                    dbcontext.Kullanicilar.Add(item);
-                }
-                dbcontext.Kategoriler.Add(k1);
-                dbcontext.Kategoriler.Add(k2);
+                });
+
                 dbcontext.SaveChanges();
             }
 

@@ -25,19 +25,33 @@ namespace DataAccess.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Kullanici>()
-                .ToTable("Kullanicilar");
+                .ToTable("Kullanicilar")
+                .HasOne(kullanici => kullanici.Rol)
+                .WithMany(rol => rol.Kullanicilar)
+                .HasForeignKey(rol=>rol.RolId)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             modelBuilder.Entity<Rol>()
-                .ToTable("Roller");
+                .ToTable("Roller")
+                .HasMany(rol => rol.Kullanicilar);
+
+
 
             modelBuilder.Entity<Yorum>()
-                .ToTable("Yorumlar");
+                .ToTable("Yorumlar")
+                .HasOne(yorum => yorum.Kategori)
+                .WithMany(kategori => kategori.Yorumlar)
+                .HasForeignKey(kategori => kategori.KategoriId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Kategori>()
-                .ToTable("Kategoriler");
+                .ToTable("Kategoriler")
+                .HasMany(kategori => kategori.Yorumlar);
 
             modelBuilder.Entity<YorumCevap>()
-                .ToTable("YorumCevaplar");
+                .ToTable("YorumCevaplar")
+                .HasOne(yorumcevap => yorumcevap.Yorum);
         }
     }
 }
