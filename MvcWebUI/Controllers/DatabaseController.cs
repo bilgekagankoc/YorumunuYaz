@@ -12,10 +12,24 @@ namespace MvcWebUI.Controllers
         {
             using (var dbcontext = new YorumunuYazContext())
             {
+
+                var yorumCevap = dbcontext.YorumCevaplar.ToList();
+                dbcontext.YorumCevaplar.RemoveRange(yorumCevap);
+
+                var yorum = dbcontext.Yorumlar.ToList();
+                dbcontext.Yorumlar.RemoveRange(yorum);
+
+
+                var kategori = dbcontext.Kategoriler.ToList();
+                dbcontext.Kategoriler.RemoveRange(kategori);
+
                 var kullanici = dbcontext.Kullanicilar.ToList();
                 dbcontext.Kullanicilar.RemoveRange(kullanici);
                 var rol = dbcontext.Roller.ToList();
                 dbcontext.Roller.RemoveRange(rol);
+
+
+                
 
 
                 dbcontext.Database.ExecuteSqlRaw("dbcc CHECKIDENT ('Kullanicilar', RESEED, 0)");

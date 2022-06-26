@@ -51,7 +51,10 @@ namespace DataAccess.Contexts
 
             modelBuilder.Entity<YorumCevap>()
                 .ToTable("YorumCevaplar")
-                .HasOne(yorumcevap => yorumcevap.Yorum);
+                .HasOne(yorumcevap => yorumcevap.Yorum)
+                .WithMany(yorum => yorum.YorumCevaplar)
+                .HasForeignKey(yorum => yorum.YorumId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
