@@ -169,6 +169,7 @@ namespace MvcWebUI.Controllers
                 // Sıralama
                 viewModel.SiraSutunBasliklariSelectList = new SelectList(siraSutunBasliklariSelectListItems, "Value", "Text", viewModel.Sira.Expression);
                 viewModel.SiraYonSelectList = new SelectList(siraYonSelectListItems, "Value", "Text", viewModel.Sira.DirectionAscending);
+                viewModel.KategorilerMultiSelectList = new MultiSelectList(_kategoriService.Query().ToList(), "Id", "Ad");
             }
             return View(viewModel);
         }

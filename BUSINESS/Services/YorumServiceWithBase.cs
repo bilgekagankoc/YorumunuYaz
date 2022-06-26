@@ -196,7 +196,7 @@ namespace Business.Services
                 query = query.Where(q => q.YorumIcerik.ToLower().Contains(filtre.YorumIcerik.ToLower()));
 
             if (filtre.Tarih.HasValue)
-                query = query.Where(q => q.Tarih.Value.ToShortTimeString() == filtre.Tarih.Value.ToShortTimeString());
+                query = query.Where(q => q.Tarih.Value.Date == filtre.Tarih.Value.Date);
             sayfa.RecordsCount = query.Count();
             int skip = (sayfa.PageNumber - 1) * sayfa.RecordsPerPageCount; 
             int take = sayfa.RecordsPerPageCount; 
